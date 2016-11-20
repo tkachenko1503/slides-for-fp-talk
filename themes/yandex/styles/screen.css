@@ -3,7 +3,7 @@
 
 body
 {
-    font: 25px/2 Textbook, Arial;
+    font: 25px/2 'Yandex Sans Text', Arial;
     font-weight: lighter;
 }
 
@@ -16,6 +16,20 @@ body.list
 .caption a
 {
     color: white !important;
+}
+
+/* Custom
+------------------------------- */
+body .slide:first-of-type h2 img
+{
+    position: static;
+
+    width: 330px;
+}
+
+.slide#cover .s img
+{
+    width: 90px;
 }
 
 /* Slide
@@ -50,38 +64,11 @@ body.full .slide:after
     content: '';
 }
 
-body .slide:first-of-type h2,
-.slide#cover > div::before,
-.slide#cover > div::after
-{
-    font-family: 'YandexRu';
-    font-weight: normal;
-}
-
-.slide#cover > div::before
-{
-    content: 'Я';
-
-    color: #f00;
-}
-
-.slide#cover > div::after
-{
-    margin-left: .45em;
-
-    content: 'ндекс';
-}
-
 .slide#cover .author,
 .slide#contacts .author
 {
     font-size: 20px;
     line-height: 30px;
-}
-
-body .slide:first-of-type h2::first-letter
-{
-    color: red;
 }
 
 .slide#cover > div::before,
@@ -90,7 +77,7 @@ body .slide:first-of-type h2::first-letter
 .slide#contacts > div::after
 {
     position: absolute;
-    top: 83px;
+    top: 80px;
     left: 120px;
 
     font-size: 39px;
@@ -116,31 +103,20 @@ body .slide:first-of-type h2::first-letter
 
 .slide#cover .s
 {
+    font-family: 'Yandex Sans Logotype';
+    font-size: 40px;
+    font-weight: bold;
+
+    line-height: 1;
+
     position: absolute;
     z-index: 100;
     top: 74px;
-    left: 214px;
+    left: 120px;
 
     overflow: hidden;
 
     padding-right: 20px;
-}
-
-.slide#cover .service
-{
-    left: 154px;
-
-    height: 44px;
-    padding: 0 10px 0 10px;
-
-    letter-spacing: .5px;
-
-    border: 6px solid #fc0;
-    border-right: none;
-
-    font-size: 27px;
-    font-weight: normal;
-    line-height: 44px;
 }
 
 .slide.section h2
@@ -350,8 +326,12 @@ body .slide:first-of-type
 {
     background: #fff;
 }
+
 body .slide:first-of-type h2
 {
+    font-family: 'Yandex Sans Logotype';
+    font-weight: bold;
+
     position: absolute;
     top: 0;
     right: 0;
@@ -396,7 +376,7 @@ body .slide:first-of-type h2
 {
     margin: 0 0 60px 0;
 
-    font: 50px Textbook, Arial;
+    font: 48px 'Yandex Sans Text', Arial;
 }
 
 .slide h3,
@@ -469,7 +449,7 @@ body .slide:first-of-type h2
 {
     margin: 0;
 
-    line-height: 50px;
+    line-height: 48px;
 }
 
 .slide.with-big-quote p.note {

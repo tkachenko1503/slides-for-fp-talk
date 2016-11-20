@@ -4,12 +4,12 @@ layout: default
 
 ---
 
-# Яндекс
+# <img src="themes/yandex/images/logo_rus.svg">
 
 ## **{{ site.presentation.title }}** {#cover}
 
 <div class="s">
-    <div class="service">{{ site.presentation.service }}</div>
+    <img src="themes/yandex/images/logo_rus.svg">
 </div>
 
 {% if site.presentation.nda %}
