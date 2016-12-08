@@ -12,15 +12,15 @@ kramdown:
   enable_coderay: false
 
 presentation:
-    title: Название темы
-    service: Сервис
-    nda: true
+    title: Как функциональное программирование может сделать нашу жизнь проще
+    service: ЯндексМаркет
+    nda: false
 
 author:
-    name: Автор
-    position: Должность
+    name: Ткаченко Сергей
+    position: Разработчик интерфейсов
     company:
-        name: Яндекс
-        url:  http://yandex.ru/
+        name: ЯндексМаркет
+        url:  http://market.yandex.ru/
 
 progress: true

@@ -20,261 +20,686 @@ layout: default
 	<p class="author">{{ site.author.name }}, <br/> {{ site.author.position }}</p>
 </div>
 
-## Верхний колонтитул
+## &nbsp;
 {:.section}
 
-### Название раздела
+### Функциональное программирование
 
-## Заголовок
 
-### Вводный текст (первый уровень текста)
+## Функциональное программирование
 
-*  Второй уровень текста
-	* Третий уровень текста (буллиты)
+* ...1960г
+* ...LISP Haskell
+* ...javascript ?
 
-	1. Четвертый уровень текста
-
-## Заголовок
-
-### Вводный текст (первый уровень текста)
-![placeholder](pictures/vertical-placeholder.png){:.right-image}
-
-*  Второй уровень текста
-	* Третий уровень текста (буллиты)
-	* Третий уровень текста (буллиты)
-
-	1. Четвертый уровень текста
 
 ## &nbsp;
 {:.with-big-quote}
-> Цитата
+> Что такое ФП?
 
-Текст
-{:.note}
 
-## Пример подсветки кода на JavaScript
+## &nbsp;
+{:.with-big-quote}
+> Это набор идей, а не чёткие инструкции и действия
+
+
+## Основная идея
+{:.section}
+
+### Используем функции
+
+
+## Функции
+
+### Характеристики функций:
+
+* Функции должны быть объектами высшего порядка.
+
+
+## Функции
 
 ~~~ javascript
-!function() {
-    var jar,
-        rstoreNames = /[^\w]/g,
-        storageInfo = window.storageInfo || window.webkitStorageInfo,
-        toString = "".toString;
 
-    jar = this.jar = function( name, storage ) {
-        return new jar.fn.init( name, storage );
-    };
+var calculateTotalPrice = data => {
+  // ...
+};
 
-    jar.storages = [];
-    jar.instances = {};
-    jar.prefixes = {
-        storageInfo: storageInfo
-    };
+fs.readFile('./offers.csv', 'utf8', calculateTotalPrice);
 
-    jar.prototype = this.jar.fn = {
-        constructor: jar,
-
-        version: 0,
-
-        storages: [],
-        support: {},
-
-        types: [ "xml", "html", "javascript", "js", "css", "text", "json" ],
-
-        init: function( name, storage ) {
-
-            // Name of a object store must contain only alphabetical symbols or low dash
-            this.name = name ? name.replace( rstoreNames, "_" ) : "jar";
-            this.deferreds = {};
-
-            if ( !storage ) {
-                this.order = jar.order;
-            }
-
-            // TODO – add support for aliases
-            return this.setup( storage || this.storages );
-        },
-
-        // Setup for all storages
-        setup: function( storages ) {
-            this.storages = storages = storages.split ? storages.split(" ") : storages;
-
-            var storage,
-                self = this,
-                def = this.register(),
-                rejects = [],
-                defs = [];
-
-            this.stores = jar.instances[ this.name ] || {};
-
-            // Jar store meta-info in lc, if we don't have it – reject call
-            if ( !window.localStorage ) {
-                window.setTimeout(function() {
-                    def.reject();
-                });
-                return this;
-            }
-
-            // Initiate all storages that we can work with
-            for ( var i = 0, l = storages.length; i < l; i++ ) {
-                storage = storages[ i ];
-
-                // This check needed if user explicitly specified storage that
-                // he wants to work with, whereas browser don't implement it
-                if ( jar.isUsed( storage ) ) {
-
-                    // If jar with the same name was created, do not try to re-create store
-                    if ( !this.stores[ storage ] ) {
-
-                        // Initiate storage
-                        defs.push( this[ storage ]( this.name, this ) );
-
-                        // Initiate meta-data for this storage
-                        this.log( storage );
-                    }
-
-                } else {
-                    rejects.push( storage );
-                }
-            }
-
-            if ( !this.order ) {
-                this.order = {};
-
-                for ( i = 0, l = this.types.length; i < l; i++ ) {
-                    this.order[ this.types[ i ] ] = storages;
-                }
-            }
-
-            if ( rejects.length == storages.length ) {
-                window.setTimeout(function() {
-                    def.reject();
-                });
-
-            } else {
-                jar.when.apply( this, defs )
-                    .done(function() {
-                        jar.instances[ this.name ] = this.stores;
-
-                        window.setTimeout(function() {
-                            def.resolve([ self ]);
-                        });
-                    })
-                    .fail(function() {
-                        def.reject();
-                    });
-            }
-            return this;
-        }
-    };
-
-    jar.fn.init.prototype = jar.fn;
-
-    jar.has = function( base, name ) {
-        return !!jar.fn.meta( name, base.replace( rstoreNames, "_" ) );
-    };
-}.call( window );
 ~~~
 
-## Пример подсветки кода
-{:.code-with-text}
 
-Вводный текст
+## Функции
+
+### Характеристики функций:
+
+* Функции должны быть объектами высшего порядка.
+* Функция не должна изменять внешнее состояние.
+
+
+## Функции
 
 ~~~ javascript
-var jar,
-    rstoreNames = /[^\w]/g,
-    storageInfo = window.storageInfo || window.webkitStorageInfo,
-    toString = "".toString;
 
-jar = this.jar = function( name, storage ) {
-    return new jar.fn.init( name, storage );
+var someGlobalFlag = true;
+
+var swapState = data => {
+    if (data.needSwapState) {
+        someGlobalFlag = !someGlobalFlag;
+    }
 };
+
+~~~
+
+
+## Функции
+
+~~~ javascript
+
+var someGlobalFlag = true;
+
+var swapState = (data, flag) => {
+    if (data.needSwapState) {
+        return flag ? true : false;
+    }
+};
+
+var newGlobalFlag = swapState(data, someGlobalFlag);
+
+~~~
+
+
+## Функции
+
+### Характеристики функций:
+
+* Функции должны быть объектами высшего порядка.
+* Функция не должна изменять внешнее состояние.
+* Функция не должна изменять переданные ей аргументы.
+
+
+## Функции
+
+~~~ javascript
+
+var toUpperCaseAll = (list) => {
+    for (let i = 0; i < list.length; i++) {
+        list[i] = list[i].toUpperCase();
+    }
+
+    return list;
+};
+
+toUpperCaseAll(['mike', 'leo', 'raf', 'don']);
+// ['MIKE', 'LEO', 'RAF', 'DON']
+
+~~~
+
+
+## Функции
+
+~~~ javascript
+
+var toUpperCaseAll = (list) => {
+    var result = [];
+
+    for (let i = 0; i < list.length; i++) {
+        result[i] = list[i].toUpperCase();
+    }
+
+    return result;
+};
+
+toUpperCaseAll(['mike', 'leo', 'raf', 'don']);
+// ['MIKE', 'LEO', 'RAF', 'DON']
+
+~~~
+
+
+## Функции
+
+### Характеристики функций:
+
+* Функции должны быть объектами высшего порядка.
+* Функция не должна изменять внешнее состояние.
+* Функция не должна изменять переданные ей аргументы.
+* Результат функции зависит только от переданных ей аргументов.
+
+
+## Функции
+
+~~~ javascript
+
+var add = (a, b) => a + b;
+
+add(2, 5) // 5
+add(2, 5) // 5
+add(2, 5) // 5
+
+~~~
+
+
+## &nbsp;
+{:.with-big-quote}
+> Чистые функции
+
+
+## Основная идея №2
+{:.section}
+### Используем только функции
+
+
+## &nbsp;
+
+### Используем функции для:
+
+* Расчётов
+* ...Заменяем переменные
+* ...Заменяем циклы и управляющие структуры
+* ...Описываем изменение состояния программы
+
+
+## Расчёты
+
+~~~ javascript
+
+a + b
+
+
+
+var add = (a, b) => a + b;
+
+add(2, 5);
+
+~~~
+
+
+## Переменные
+
+~~~ javascript
+
+var five = 5;
+
+
+
+var five = () => 5;
+
+~~~
+
+
+## Циклы
+
+~~~ javascript
+
+var transformList = (callback, list) => {
+    var result = [];
+
+    for (let value of list) {
+        let newValue = callback(value);
+
+        result.push(newValue);
+    }
+
+    return result;
+}
+
+~~~
+
+
+## Циклы
+
+~~~ javascript
+
+function transformList(callback, [x, ...list]) {
+    if (!x) return [];
+
+    return [callback(x),  . . . transformList(callback, list)];
+}
+
 ~~~
 
 ## &nbsp;
-{:.big-code}
+{:.section}
+### Изменение состояния программы
+
+
+## Изменение состояния программы
+
+* Инструменты
+  * ...Замыкания
+  * ...Каррирование
+  * ...Композиция
+
+
+## Замыкания
 
 ~~~ javascript
-!function() {
-    var jar,
-        rstoreNames = /[^\w]/g,
-        storageInfo = window.storageInfo || window.webkitStorageInfo,
-        toString = "".toString;
 
-    jar = this.jar = function( name, storage ) {
-        return new jar.fn.init( name, storage );
+var add = function (x) {
+    return function (y) {
+        return x + y;
     };
+};
 
-    jar.storages = [];
-    jar.instances = {};
-    jar.prefixes = {
-        storageInfo: storageInfo
-    };
-}.call( window );
+var increment = add(1);
+var addTen = add(10);
+
 ~~~
 
-## LaTeX
 
-Библиотека для латекса довольно тяжелая, а нужна она в редких случаях.
-Поэтому она не включена в репу, ее нужно либо установить через bower либо иметь интернет.
+## Каррирование
 
-When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
-$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+~~~ javascript
 
-## Заголовок
-{:.images}
+var add3 = (a, b, c) =>  a + b + c;
+var add3Curryed = curry(add3);
 
-![](pictures/horizontal-placeholder.png)
-*Текст*
+add3Curryed(1, 2, 3); // 6
+add3Curryed(1)(2, 3); // 6
+add3Curryed(1, 2)(3); // 6
+add3Curryed(1)(2)(3); // 6
 
-![](pictures/horizontal-placeholder.png)
-*Текст*
+~~~
 
-![](pictures/horizontal-placeholder.png)
-*Текст*
 
-## Заголовок
-{:.images .two}
+## Каррирование
 
-![](pictures/horizontal-middle-placeholder.png)
-*Текст*
+~~~ javascript
 
-![](pictures/horizontal-middle-placeholder.png)
-*Текст*
+curry = func => {
+    var arity = func.length;
 
-## Заголовок
+    return function f1(. . . args) {
+        if (args.length >= arity) {
+            return func.apply(null, args);
+        } else{
+            return function f2(. . . nargs) {
+              return f1.apply(null, args.concat(nargs));
+            };
+        }
+    };
+};
+
+~~~
+
+
+## Композиция
+
+~~~ javascript
+
+var capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+var trim = str => str.trim();
+
+
+var formatStr = compose(capitalize, trim);
+
+~~~
+
+
+## Композиция
+
+~~~ javascript
+
+var split = curry((separator, str) => str.split(separator));
+var join = curry((separator, list) => list.join(separator));
+var map = curry((func, list) => list.map(func));
+var toLowerCase = str => str.toLowerCase();
+
+
+var toSlug = compose(
+  encodeURIComponent,
+  joinString('-'),
+  map(stringToLowerCase),
+  splitString(' ')
+);
+
+~~~
+
+## Композиция
+
+~~~ javascript
+
+var compose = (. . . funcs) =>
+    (value) => funcs.reverse().reduce((v,fn) => fn(v), value);
+
+~~~
+
+
+## &nbsp;
 {:.center}
+![](pictures/Lego.jpg)
 
-![](pictures/horizontal-big-placeholder.png){:.tmp}
 
-## **![](pictures/cover-placeholder.png)**
+## Какие плюсы мы получаем?
 
-## ![](pictures/horizontal-cover-placeholder.png)
+* ...Предсказуемое поведение
+* ...Чистые функции легче рафакторить
+* ...Чистые функции намного проще отлаживать и тестировать
+* ...Чистые функции легко поддаются оптимизации
+* ...С помощью чистых функций мы можем откладывать и параллелить вычисления
+
+
+## &nbsp;
+{:.section}
+### Как это использовать в реальной жизни?
+
+
+## Мы живём в мире сайд-эффектов
+
+* Запись логов
+* Запись в localStorage
+* Обращение к DOM элементам
+* Отправка запросов на сервер
+* и тд
+
+
+## Инструменты
+
+* ramda.js
+* ramda-fantasy.js
+
+[fantasy-land](https://github.com/fantasyland/fantasy-land)
+
+
+## Идеальный мир
+
+~~~ javascript
+
+var getRows = pluck('rows');
+var getNames = pluck('name');
+
+var renderUsersTable = Engine.render('users-table');
+
+var getUsersFromDb = compose(getRows, User.findAll);
+
+var cleanUpData = compose(capitalise, getNames);
+
+var makePage = compose(renderUsersTable, map(cleanUpData), getUsersFromDb);
+
+
+makePage( {limit: 20} );
+
+~~~
+
+
+## &nbsp;
+{:.section}
+### Контейнеры
+
+
+## Контейнеры
+
+~~~ javascript
+
+var Container = function(x) {
+    this.__value = x;
+};
+
+Container.of = x => new Container(x);
+
+Container.prototype.map = func => {
+    return Container.of(func(this.__value));
+};
+
+~~~
+
+
+## Контейнеры
+
+~~~ javascript
+
+Container.of(2).map(function(two){ return two + 2 });
+// Container(4)
+
+~~~
+
+
+## &nbsp;
+{:.section}
+### NullPointerException
+
+
+## NullPointerException
+
+~~~ javascript
+
+var getUsersFromDb = compose(getRows, User.findAll);
+
+~~~
+
+
+## NullPointerException
+
+~~~ javascript
+
+var getUsersFromDb = compose(getRows, Maybe.of, User.findAll);
+
+~~~
+
+
+## NullPointerException
+
+~~~ javascript
+
+var getUsersFromDb = compose(map(getRows), Maybe.of, User.findAll);
+
+getUsersFromDb() // Maybe([{name: 'leo', name: 'don']);
+getUsersFromDb() // Maybe(null);
+
+~~~
+
+
+## Maybe
+
+~~~ javascript
+
+var Maybe = function(x) {
+    this.__value = x;
+}
+
+Maybe.of = function(x) {
+    return new Maybe(x);
+}
+
+Maybe.prototype.isNothing = function() {
+    return (this.__value === null || this.__value === undefined);
+}
+
+Maybe.prototype.map = function(f) {
+    return this.isNothing() ? Maybe.of(null) : Maybe.of(f(this.__value));
+}
+
+~~~
+
+
+## &nbsp;
+{:.section}
+### Ветвление
+
+
+## Ветвление
+
+~~~ javascript
+
+var renderUsersTable = Engine.render('users-table');
+
+var makePage = compose(
+  map(renderUsersTable),
+  map(cleanUpData),
+  getUsersFromDb
+);
+
+~~~
+
+
+## Ветвление
+
+~~~ javascript
+
+var errorMessage = 'sorry there is no users';
+var error = Either.Left(errorMessage);
+
+var getUsers = cond([
+    [isArrayLike, Either.Right],
+    [T, always(error)]
+]);
+
+var getUsersFromDb = compose(map(getRows), getUsers, User.findAll);
+
+~~~
+
+
+## Ветвление
+
+~~~ javascript
+
+var renderUsersTable = Engine.render('users-table');
+var renderErrorMessage = Engine.render('error-message');
+
+var render = Either.either(renderErrorMessage, renderUsersTable);
+
+~~~
+
+
+## Ветвление
+
+~~~ javascript
+
+var makePage = compose(render, getUsersFromDb);
+
+~~~
+
+
+## &nbsp;
+{:.section}
+### Асинхронность
+
+
+## Асинхронность
+
+~~~ javascript
+
+var getUsersFromDb = compose(getRows, User.findAll);
+
+~~~
+
+
+## Асинхронность
+
+~~~ javascript
+
+var findAll = params =>
+    Future((reject, resolve) =>
+        User.findAll(params)
+            .then(resolve)
+            .catch(reject));
+
+var getUsersFromDb = compose(map(getRows), findAll);
+
+var makePage = compose(map(cleanUpData), getUsersFromDb);
+
+~~~
+
+
+## Асинхронность
+
+~~~ javascript
+
+var page = makePage({limit: 20});
+
+page.fork(renderErrorMessage, renderUsersTable);
+
+~~~
+
+
+## &nbsp;
+{:.section}
+### Всё вместе
+
+
+## Всё вместе
+
+~~~ javascript
+
+var getRows = pluck('rows');
+var getNames = pluck('name');
+var cleanUpData = compose(capitalise, getNames);
+
+var renderUsersTable = Engine.render('users-table');
+var renderErrorMessage = Engine.render('error-message');
+
+var render = Either.either(renderErrorMessage, renderUsersTable);
+
+~~~
+
+
+## Всё вместе
+
+~~~ javascript
+
+var render = . . .
+
+var errorMessage = 'sorry there is no users';
+var error = Either.Left(errorMessage);
+
+var getUsers = cond([
+  [isArrayLike, Either.Right],
+  [T, always(error)]
+]);
+
+var findAll = params =>
+    Future((reject, resolve) =>
+        User.findAll(params).then(resolve).catch(reject));
+
+var getUsersFromDb = compose(flatMap(getRows), map(getUsers), findAll);
+
+~~~
+
+
+## Всё вместе
+
+~~~ javascript
+
+var render = . . .
+var getUsersFromDb = . . .
+
+var makePage = compose(map(render), flatMap(cleanUpData), getUsersFromDb);
+
+var page = makePage({limit: 20});
+
+page.fork(logError, insertToDOM);
+
+~~~
+
+
+## &nbsp;
 {:.cover}
 
-## Таблица
-
-|  Locavore      | Umami       | Helvetica | Vegan     |
-+----------------|-------------|-----------|-----------+
-| Fingerstache   | Kale        | Chips     | Keytar    |
-| Sriracha       | Gluten-free | Ennui     | Keffiyeh  |
-| Thundercats    | Jean        | Shorts    | Biodiesel |
-| Terry          | Richardson  | Swag      | Blog      |
-+----------------|-------------|-----------|-----------+
+![](pictures/happy.jpg){:.tmp}
 
 
-## Таблица с дополнительным полем
+## Плюсы
 
-{:.with-additional-line}
-|  Locavore      | Umami       | Helvetica | Vegan     |
-+----------------|-------------|-----------|-----------+
-| Fingerstache   | Kale        | Chips     | Keytar    |
-| Sriracha       | Gluten-free | Ennui     | Keffiyeh  |
-| Thundercats    | Jean        | Shorts    | Biodiesel |
-| Terry          | Richardson  | Swag      | Blog      |
-+----------------|-------------|-----------|-----------+
-| Terry          | Richardson  | Swag      | Blog      |
+* ...Легко рефакторить
+* ...Легко тестировать
+* ...Легко оптимизировать
+* ...За функциональным программированием будущее
+
+
+## Минусы
+
+* ...Есть порог вхождения
+* ...Для не больших приложений может быть слишком многословным
+* ...В некоторых случаях может быть менее производительным
+
+
+## Полезные ссылки
+
+* [https://github.com/MostlyAdequate/mostly-adequate-guide-ru](https://github.com/MostlyAdequate/mostly-adequate-guide-ru)
+* [http://ramdajs.com/docs/](http://ramdajs.com/docs/)
+* [https://github.com/ramda/ramda-fantasy](https://github.com/ramda/ramda-fantasy)
+* [https://github.com/fantasyland/fantasy-land](https://github.com/fantasyland/fantasy-land)
+
 
 ## **Контакты** {#contacts}
 
@@ -283,10 +708,8 @@ $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
 <p class="position">{{ site.author.position }}</p>
 
     <div class="contacts">
-        <p class="contacts-left contacts-top phone">+7 (000) 000-00-00</p>
-        <p class="contacts-left mail">почта@yandex-team.ru</p>
-        <p class="contacts-right contacts-top twitter">@twitter</p>
-        <!-- <p class="contacts-right contacts-bottom vk">vk</p> -->
-        <p class="contacts-right facebook">facebook</p>
+        <p class="contacts-left mail">ts1503@yandex-team.ru</p>
+
+        <p class="contacts-left contacts-top twitter">@tka4enko1503</p>
     </div>
 </div>

@@ -581,7 +581,7 @@ body .slide:first-of-type h2
 .slide code[class*='language-'],
 .slide pre[class*='language-']
 {
-    font-family: 'InputMono' !important;
+    /*font-family: 'InputMono' !important;*/
     font-size: 21px;
     line-height: 1.2;
 }
@@ -592,7 +592,7 @@ body .slide:first-of-type h2
 
     width: 984px;
     margin-left: -60px;
-    padding: 10px 46px;
+    padding: 10px 0px 10px 40px;
 
     border: none;
     border-radius: 0;
