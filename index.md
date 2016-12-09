@@ -2,6 +2,16 @@
 
 layout: default
 
+style: |
+
+    .slide.center h2 {
+        margin: 0px 0 30px 0;
+    }
+
+    .slide.center .copy {
+        margin-top: 40px;
+        font-size: 12px;
+    }
 ---
 
 # <img src="themes/yandex/images/logo_rus.svg">
@@ -381,7 +391,7 @@ var compose = (. . . funcs) =>
 
 ## &nbsp;
 {:.section}
-### Как это использовать в реальной жизни?
+### Как это использовать в&nbsp;реальной жизни?
 
 
 ## Мы живём в мире сайд-эффектов
@@ -673,9 +683,11 @@ page.fork(logError, insertToDOM);
 
 
 ## &nbsp;
-{:.cover}
+{:.center}
+![](pictures/Happy.jpg)
 
-![](pictures/happy.jpg){:.tmp}
+Homer Simpson.  ©1999 20TH CENTURY FOX FILM CORP.
+{:.copy}
 
 
 ## Плюсы
