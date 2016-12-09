@@ -28,8 +28,8 @@ layout: default
 
 ## Функциональное программирование
 
-* ...1960г
-* ...LISP Haskell
+* ...1950 - 1960г
+* ...LISP, Haskell
 * ...javascript ?
 
 
@@ -374,9 +374,9 @@ var compose = (. . . funcs) =>
 
 * ...Предсказуемое поведение
 * ...Чистые функции легче рафакторить
-* ...Чистые функции намного проще отлаживать и тестировать
+* ...Чистые функции проще отлаживать и тестировать
 * ...Чистые функции легко поддаются оптимизации
-* ...С помощью чистых функций мы можем откладывать и параллелить вычисления
+* ...Можем откладывать и параллелить вычисления
 
 
 ## &nbsp;
@@ -514,10 +514,10 @@ Maybe.prototype.map = function(f) {
 
 ## &nbsp;
 {:.section}
-### Ветвление
+### Обработка ошибок
 
 
-## Ветвление
+## Обработка ошибок
 
 ~~~ javascript
 
@@ -532,16 +532,16 @@ var makePage = compose(
 ~~~
 
 
-## Ветвление
+## Обработка ошибок
 
 ~~~ javascript
 
 var errorMessage = 'sorry there is no users';
-var error = Either.Left(errorMessage);
+var errorContainer = Either.Left(errorMessage);
 
 var getUsers = cond([
     [isArrayLike, Either.Right],
-    [T, always(error)]
+    [T, always(errorContainer)]
 ]);
 
 var getUsersFromDb = compose(map(getRows), getUsers, User.findAll);
@@ -549,7 +549,7 @@ var getUsersFromDb = compose(map(getRows), getUsers, User.findAll);
 ~~~
 
 
-## Ветвление
+## Обработка ошибок
 
 ~~~ javascript
 
@@ -561,7 +561,7 @@ var render = Either.either(renderErrorMessage, renderUsersTable);
 ~~~
 
 
-## Ветвление
+## Обработка ошибок
 
 ~~~ javascript
 
@@ -640,11 +640,11 @@ var render = Either.either(renderErrorMessage, renderUsersTable);
 var render = . . .
 
 var errorMessage = 'sorry there is no users';
-var error = Either.Left(errorMessage);
+var errorContainer = Either.Left(errorMessage);
 
 var getUsers = cond([
   [isArrayLike, Either.Right],
-  [T, always(error)]
+  [T, always(errorContainer)]
 ]);
 
 var findAll = params =>
