@@ -1,0 +1,768 @@
+<!DOCTYPE HTML>
+
+
+<html lang="ru">
+<head>
+	<title></title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=792, user-scalable=no">
+	<link rel="stylesheet" href="themes/yandex/styles/screen.css" />
+	<!-- <link rel="stylesheet" href="themes/yandex/styles/prism-white.css" /> -->
+	<link rel="stylesheet" href="bower_components/prismjs/prism-twilight.css" />
+	<style>
+.slide.center h2 {
+    margin: 0px 0 30px 0;
+}
+
+.slide.center .copy {
+    margin-top: 40px;
+    font-size: 12px;
+}
+</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Как функциональное программирование может сделать нашу жизнь проще</h1>
+		<p>Сергей Ткаченко, <a href="http://market.yandex.ru/">ЯндексМаркет</a></p>
+
+	</header>
+
+	<section id="img-srcthemesyandeximageslogorussvg" class="slide cover"><div><h2><img src="themes/yandex/images/logo_rus.svg" /></h2>
+
+</div></section>
+<section class="slide shout" id="cover"><div><h2>Как функциональное программирование может сделать нашу жизнь проще</h2>
+
+<div class="s">
+    <img src="themes/yandex/images/logo_rus.svg" />
+</div>
+
+<div class="info">
+	<p class="author">Сергей Ткаченко, <br /> Разработчик интерфейсов</p>
+</div>
+
+</div></section>
+<section class="slide section" id="nbsp"><div><h2> </h2>
+
+<h3 id="section">Функциональное программирование</h3>
+
+</div></section>
+<section class="slide" id="section-1"><div><h2>Функциональное программирование</h2>
+
+<ul>
+  <li class="next">1950 - 1960г</li>
+  <li class="next">LISP, Haskell</li>
+  <li class="next">javascript ?</li>
+</ul>
+
+</div></section>
+<section class="slide with-big-quote" id="nbsp-1"><div><h2> </h2>
+<blockquote>
+  <p>Что такое ФП?</p>
+</blockquote>
+
+</div></section>
+<section class="slide with-big-quote" id="nbsp-2"><div><h2> </h2>
+<blockquote>
+  <p>Это набор идей, а не чёткие инструкции и действия</p>
+</blockquote>
+
+</div></section>
+<section class="slide section" id="section-2"><div><h2>Основная идея</h2>
+
+<h3 id="section-3">Используем функции</h3>
+
+</div></section>
+<section class="slide" id="section-4"><div><h2>Функции</h2>
+
+<h3 id="section-5">Характеристики функций:</h3>
+
+<ul>
+  <li>Функции должны быть объектами высшего порядка</li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-6"><div><h2>Функции</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">calculateTotalPrice</span> <span class="o">=</span> <span class="nx">data</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">};</span>
+
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">'./offers.csv'</span><span class="p">,</span> <span class="s1">'utf8'</span><span class="p">,</span> <span class="nx">calculateTotalPrice</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-7"><div><h2>Функции</h2>
+
+<h3 id="section-8">Характеристики функций:</h3>
+
+<ul>
+  <li>Функции должны быть объектами высшего порядка</li>
+  <li>Функция не должна изменять внешнее состояние</li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-9"><div><h2>Функции</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">someGlobalFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">swapState</span> <span class="o">=</span> <span class="nx">data</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">needSwapState</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">someGlobalFlag</span> <span class="o">=</span> <span class="o">!</span><span class="nx">someGlobalFlag</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-10"><div><h2>Функции</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">someGlobalFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">swapState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">flag</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">needSwapState</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">flag</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">newGlobalFlag</span> <span class="o">=</span> <span class="nx">swapState</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">someGlobalFlag</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-11"><div><h2>Функции</h2>
+
+<h3 id="section-12">Характеристики функций:</h3>
+
+<ul>
+  <li>Функции должны быть объектами высшего порядка</li>
+  <li>Функция не должна изменять внешнее состояние</li>
+  <li>Функция не должна изменять переданные ей аргументы</li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-13"><div><h2>Функции</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">toUpperCaseAll</span> <span class="o">=</span> <span class="p">(</span><span class="nx">list</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">toUpperCase</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">list</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">toUpperCaseAll</span><span class="p">([</span><span class="s1">'mike'</span><span class="p">,</span> <span class="s1">'leo'</span><span class="p">,</span> <span class="s1">'raf'</span><span class="p">,</span> <span class="s1">'don'</span><span class="p">]);</span>
+<span class="c1">// ['MIKE', 'LEO', 'RAF', 'DON']</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-14"><div><h2>Функции</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">toUpperCaseAll</span> <span class="o">=</span> <span class="p">(</span><span class="nx">list</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">result</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">toUpperCase</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">toUpperCaseAll</span><span class="p">([</span><span class="s1">'mike'</span><span class="p">,</span> <span class="s1">'leo'</span><span class="p">,</span> <span class="s1">'raf'</span><span class="p">,</span> <span class="s1">'don'</span><span class="p">]);</span>
+<span class="c1">// ['MIKE', 'LEO', 'RAF', 'DON']</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-15"><div><h2>Функции</h2>
+
+<h3 id="section-16">Характеристики функций:</h3>
+
+<ul>
+  <li>Функции должны быть объектами высшего порядка</li>
+  <li>Функция не должна изменять внешнее состояние</li>
+  <li>Функция не должна изменять переданные ей аргументы</li>
+  <li>Результат функции зависит только от переданных ей аргументов</li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-17"><div><h2>Функции</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+
+<span class="nx">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1">// 5</span>
+<span class="nx">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1">// 5</span>
+<span class="nx">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1">// 5</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide with-big-quote" id="nbsp-3"><div><h2> </h2>
+<blockquote>
+  <p>Чистые функции</p>
+</blockquote>
+
+</div></section>
+<section class="slide section" id="section-18"><div><h2>Основная идея №2</h2>
+<h3 id="section-19">Используем только функции</h3>
+
+</div></section>
+<section class="slide" id="nbsp-4"><div><h2> </h2>
+
+<h3 id="section-20">Используем функции для:</h3>
+
+<ul>
+  <li>Расчётов</li>
+  <li class="next">Заменяем переменные</li>
+  <li class="next">Заменяем циклы и управляющие структуры</li>
+  <li class="next">Описываем изменение состояния программы</li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-21"><div><h2>Расчёты</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+
+
+
+<span class="kd">var</span> <span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+
+<span class="nx">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-22"><div><h2>Переменные</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">five</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+
+
+<span class="kd">var</span> <span class="nx">five</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">;</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-23"><div><h2>Циклы</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">transformList</span> <span class="o">=</span> <span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">list</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">value</span> <span class="nx">of</span> <span class="nx">list</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">newValue</span> <span class="o">=</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+
+        <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newValue</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-24"><div><h2>Циклы</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">function</span> <span class="nx">transformList</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="p">[</span><span class="nx">x</span><span class="p">,</span> <span class="p" class="next"></span><span class="nx">list</span><span class="p">])</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">x</span><span class="p">)</span> <span class="k">return</span> <span class="p">[];</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="nx">callback</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span>  <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="nx">transformList</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">list</span><span class="p">)];</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide section" id="nbsp-5"><div><h2> </h2>
+<h3 id="section-25">Изменение состояния программы</h3>
+
+</div></section>
+<section class="slide" id="section-26"><div><h2>Изменение состояния программы</h2>
+
+<ul>
+  <li>Инструменты
+    <ul>
+      <li class="next">Замыкания</li>
+      <li class="next">Каррирование</li>
+      <li class="next">Композиция</li>
+    </ul>
+  </li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-27"><div><h2>Замыкания</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">increment</span> <span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">addTen</span> <span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-28"><div><h2>Каррирование</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">add3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span>  <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">add3Curryed</span> <span class="o">=</span> <span class="nx">curry</span><span class="p">(</span><span class="nx">add3</span><span class="p">);</span>
+
+<span class="nx">add3Curryed</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span> <span class="c1">// 6</span>
+<span class="nx">add3Curryed</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span> <span class="c1">// 6</span>
+<span class="nx">add3Curryed</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 6</span>
+<span class="nx">add3Curryed</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 6</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-29"><div><h2>Каррирование</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="nx">curry</span> <span class="o">=</span> <span class="nx">func</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">arity</span> <span class="o">=</span> <span class="nx">func</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="kd">function</span> <span class="nx">f1</span><span class="p">(.</span> <span class="p">.</span> <span class="p">.</span> <span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">arity</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">func</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+            <span class="k">return</span> <span class="kd">function</span> <span class="nx">f2</span><span class="p">(.</span> <span class="p">.</span> <span class="p">.</span> <span class="nx">nargs</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">return</span> <span class="nx">f1</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">args</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">nargs</span><span class="p">));</span>
+            <span class="p">};</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-30"><div><h2>Композиция</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">capitalize</span> <span class="o">=</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">trim</span> <span class="o">=</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+
+
+<span class="kd">var</span> <span class="nx">formatStr</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">capitalize</span><span class="p">,</span> <span class="nx">trim</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-31"><div><h2>Композиция</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">split</span> <span class="o">=</span> <span class="nx">curry</span><span class="p">((</span><span class="nx">separator</span><span class="p">,</span> <span class="nx">str</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="nx">separator</span><span class="p">));</span>
+<span class="kd">var</span> <span class="nx">join</span> <span class="o">=</span> <span class="nx">curry</span><span class="p">((</span><span class="nx">separator</span><span class="p">,</span> <span class="nx">list</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">separator</span><span class="p">));</span>
+<span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">curry</span><span class="p">((</span><span class="nx">func</span><span class="p">,</span> <span class="nx">list</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">func</span><span class="p">));</span>
+<span class="kd">var</span> <span class="nx">toLowerCase</span> <span class="o">=</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+
+
+<span class="kd">var</span> <span class="nx">toSlug</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span>
+  <span class="nb">encodeURIComponent</span><span class="p">,</span>
+  <span class="nx">joinString</span><span class="p">(</span><span class="s1">'-'</span><span class="p">),</span>
+  <span class="nx">map</span><span class="p">(</span><span class="nx">stringToLowerCase</span><span class="p">),</span>
+  <span class="nx">splitString</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span>
+<span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-32"><div><h2>Композиция</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">compose</span> <span class="o">=</span> <span class="p">(.</span> <span class="p">.</span> <span class="p">.</span> <span class="nx">funcs</span><span class="p">)</span> <span class="o">=&gt;</span>
+    <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">funcs</span><span class="p">.</span><span class="nx">reverse</span><span class="p">().</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">v</span><span class="p">,</span><span class="nx">fn</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">v</span><span class="p">),</span> <span class="nx">value</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide center" id="nbsp-6"><div><h2> </h2>
+<p><img src="pictures/Lego.jpg" alt="" /></p>
+
+</div></section>
+<section class="slide" id="section-33"><div><h2>Какие плюсы мы получаем?</h2>
+
+<ul>
+  <li class="next">Предсказуемое поведение</li>
+  <li class="next">Чистые функции легче рафакторить</li>
+  <li class="next">Чистые функции проще отлаживать и тестировать</li>
+  <li class="next">Чистые функции легко поддаются оптимизации</li>
+  <li class="next">Можем откладывать и параллелить вычисления</li>
+</ul>
+
+</div></section>
+<section class="slide section" id="nbsp-7"><div><h2> </h2>
+<h3 id="nbsp-">Как это использовать в реальной жизни?</h3>
+
+</div></section>
+<section class="slide" id="section-34"><div><h2>Мы живём в мире сайд-эффектов</h2>
+
+<ul>
+  <li>Запись логов</li>
+  <li>Запись в localStorage</li>
+  <li>Обращение к DOM элементам</li>
+  <li>Отправка запросов на сервер</li>
+  <li>и тд.</li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-35"><div><h2>Инструменты</h2>
+
+<ul>
+  <li>ramda.js</li>
+  <li>ramda-fantasy.js</li>
+</ul>
+
+<p><a href="https://github.com/fantasyland/fantasy-land">fantasy-land</a></p>
+
+</div></section>
+<section class="slide" id="section-36"><div><h2>Идеальный мир</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">getRows</span> <span class="o">=</span> <span class="nx">pluck</span><span class="p">(</span><span class="s1">'rows'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">getNames</span> <span class="o">=</span> <span class="nx">pluck</span><span class="p">(</span><span class="s1">'name'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">renderUsersTable</span> <span class="o">=</span> <span class="nx">Engine</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'users-table'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">getUsersFromDb</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">getRows</span><span class="p">,</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findAll</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">cleanUpData</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">capitalise</span><span class="p">,</span> <span class="nx">getNames</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">makePage</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">renderUsersTable</span><span class="p">,</span> <span class="nx">map</span><span class="p">(</span><span class="nx">cleanUpData</span><span class="p">),</span> <span class="nx">getUsersFromDb</span><span class="p">);</span>
+
+
+<span class="nx">makePage</span><span class="p">(</span> <span class="p">{</span><span class="na">limit</span><span class="p">:</span> <span class="mi">20</span><span class="p">}</span> <span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide section" id="nbsp-8"><div><h2> </h2>
+<h3 id="section-37">Контейнеры</h3>
+
+</div></section>
+<section class="slide" id="section-38"><div><h2>Контейнеры</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">Container</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">__value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">Container</span><span class="p">.</span><span class="nx">of</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+
+<span class="nx">Container</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="nx">func</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">.</span><span class="nx">of</span><span class="p">(</span><span class="nx">func</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">__value</span><span class="p">));</span>
+<span class="p">};</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-39"><div><h2>Контейнеры</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="nx">Container</span><span class="p">.</span><span class="nx">of</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">two</span><span class="p">){</span> <span class="k">return</span> <span class="nx">two</span> <span class="o">+</span> <span class="mi">2</span> <span class="p">});</span>
+<span class="c1">// Container(4)</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide section" id="nbsp-9"><div><h2> </h2>
+<h3 id="nullpointerexception">NullPointerException</h3>
+
+</div></section>
+<section class="slide" id="nullpointerexception-1"><div><h2>NullPointerException</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">getUsersFromDb</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">getRows</span><span class="p">,</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findAll</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="nullpointerexception-2"><div><h2>NullPointerException</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">getUsersFromDb</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">getRows</span><span class="p">,</span> <span class="nx">Maybe</span><span class="p">.</span><span class="nx">of</span><span class="p">,</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findAll</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="nullpointerexception-3"><div><h2>NullPointerException</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">getUsersFromDb</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">map</span><span class="p">(</span><span class="nx">getRows</span><span class="p">),</span> <span class="nx">Maybe</span><span class="p">.</span><span class="nx">of</span><span class="p">,</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findAll</span><span class="p">);</span>
+
+<span class="nx">getUsersFromDb</span><span class="p">()</span> <span class="c1">// Maybe([{name: 'leo', name: 'don']);</span>
+<span class="nx">getUsersFromDb</span><span class="p">()</span> <span class="c1">// Maybe(null);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="maybe"><div><h2>Maybe</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">Maybe</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">__value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Maybe</span><span class="p">.</span><span class="nx">of</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Maybe</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">Maybe</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isNothing</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">__value</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">__value</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">Maybe</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">isNothing</span><span class="p">()</span> <span class="p">?</span> <span class="nx">Maybe</span><span class="p">.</span><span class="nx">of</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span> <span class="p">:</span> <span class="nx">Maybe</span><span class="p">.</span><span class="nx">of</span><span class="p">(</span><span class="nx">f</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">__value</span><span class="p">));</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide section" id="nbsp-10"><div><h2> </h2>
+<h3 id="section-40">Обработка ошибок</h3>
+
+</div></section>
+<section class="slide" id="section-41"><div><h2>Обработка ошибок</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">renderUsersTable</span> <span class="o">=</span> <span class="nx">Engine</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'users-table'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">makePage</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span>
+  <span class="nx">map</span><span class="p">(</span><span class="nx">renderUsersTable</span><span class="p">),</span>
+  <span class="nx">map</span><span class="p">(</span><span class="nx">cleanUpData</span><span class="p">),</span>
+  <span class="nx">getUsersFromDb</span>
+<span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-42"><div><h2>Обработка ошибок</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">errorMessage</span> <span class="o">=</span> <span class="s1">'sorry there is no users'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">errorContainer</span> <span class="o">=</span> <span class="nx">Either</span><span class="p">.</span><span class="nx">Left</span><span class="p">(</span><span class="nx">errorMessage</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">getUsers</span> <span class="o">=</span> <span class="nx">cond</span><span class="p">([</span>
+    <span class="p">[</span><span class="nx">isArrayLike</span><span class="p">,</span> <span class="nx">Either</span><span class="p">.</span><span class="nx">Right</span><span class="p">],</span>
+    <span class="p">[</span><span class="nx">T</span><span class="p">,</span> <span class="nx">always</span><span class="p">(</span><span class="nx">errorContainer</span><span class="p">)]</span>
+<span class="p">]);</span>
+
+<span class="kd">var</span> <span class="nx">getUsersFromDb</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">map</span><span class="p">(</span><span class="nx">getRows</span><span class="p">),</span> <span class="nx">getUsers</span><span class="p">,</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findAll</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-43"><div><h2>Обработка ошибок</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">renderUsersTable</span> <span class="o">=</span> <span class="nx">Engine</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'users-table'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">renderErrorMessage</span> <span class="o">=</span> <span class="nx">Engine</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'error-message'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">render</span> <span class="o">=</span> <span class="nx">Either</span><span class="p">.</span><span class="nx">either</span><span class="p">(</span><span class="nx">renderErrorMessage</span><span class="p">,</span> <span class="nx">renderUsersTable</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-44"><div><h2>Обработка ошибок</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">makePage</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">render</span><span class="p">,</span> <span class="nx">getUsersFromDb</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide section" id="nbsp-11"><div><h2> </h2>
+<h3 id="section-45">Асинхронность</h3>
+
+</div></section>
+<section class="slide" id="section-46"><div><h2>Асинхронность</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">getUsersFromDb</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">getRows</span><span class="p">,</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findAll</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-47"><div><h2>Асинхронность</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">findAll</span> <span class="o">=</span> <span class="nx">params</span> <span class="o">=&gt;</span>
+    <span class="nx">Future</span><span class="p">((</span><span class="nx">reject</span><span class="p">,</span> <span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">User</span><span class="p">.</span><span class="nx">findAll</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">resolve</span><span class="p">)</span>
+            <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">reject</span><span class="p">));</span>
+
+<span class="kd">var</span> <span class="nx">getUsersFromDb</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">map</span><span class="p">(</span><span class="nx">getRows</span><span class="p">),</span> <span class="nx">findAll</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">makePage</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">map</span><span class="p">(</span><span class="nx">cleanUpData</span><span class="p">),</span> <span class="nx">getUsersFromDb</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-48"><div><h2>Асинхронность</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">makePage</span><span class="p">({</span><span class="na">limit</span><span class="p">:</span> <span class="mi">20</span><span class="p">});</span>
+
+<span class="nx">page</span><span class="p">.</span><span class="nx">fork</span><span class="p">(</span><span class="nx">renderErrorMessage</span><span class="p">,</span> <span class="nx">renderUsersTable</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide section" id="nbsp-12"><div><h2> </h2>
+<h3 id="section-49">Всё вместе</h3>
+
+</div></section>
+<section class="slide" id="section-50"><div><h2>Всё вместе</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">getRows</span> <span class="o">=</span> <span class="nx">pluck</span><span class="p">(</span><span class="s1">'rows'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">getNames</span> <span class="o">=</span> <span class="nx">pluck</span><span class="p">(</span><span class="s1">'name'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">cleanUpData</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">capitalise</span><span class="p">,</span> <span class="nx">getNames</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">renderUsersTable</span> <span class="o">=</span> <span class="nx">Engine</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'users-table'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">renderErrorMessage</span> <span class="o">=</span> <span class="nx">Engine</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'error-message'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">render</span> <span class="o">=</span> <span class="nx">Either</span><span class="p">.</span><span class="nx">either</span><span class="p">(</span><span class="nx">renderErrorMessage</span><span class="p">,</span> <span class="nx">renderUsersTable</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-51"><div><h2>Всё вместе</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">render</span> <span class="o">=</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
+
+<span class="kd">var</span> <span class="nx">errorMessage</span> <span class="o">=</span> <span class="s1">'sorry there is no users'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">errorContainer</span> <span class="o">=</span> <span class="nx">Either</span><span class="p">.</span><span class="nx">Left</span><span class="p">(</span><span class="nx">errorMessage</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">getUsers</span> <span class="o">=</span> <span class="nx">cond</span><span class="p">([</span>
+  <span class="p">[</span><span class="nx">isArrayLike</span><span class="p">,</span> <span class="nx">Either</span><span class="p">.</span><span class="nx">Right</span><span class="p">],</span>
+  <span class="p">[</span><span class="nx">T</span><span class="p">,</span> <span class="nx">always</span><span class="p">(</span><span class="nx">errorContainer</span><span class="p">)]</span>
+<span class="p">]);</span>
+
+<span class="kd">var</span> <span class="nx">findAll</span> <span class="o">=</span> <span class="nx">params</span> <span class="o">=&gt;</span>
+    <span class="nx">Future</span><span class="p">((</span><span class="nx">reject</span><span class="p">,</span> <span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">User</span><span class="p">.</span><span class="nx">findAll</span><span class="p">(</span><span class="nx">params</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">resolve</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">reject</span><span class="p">));</span>
+
+<span class="kd">var</span> <span class="nx">getUsersFromDb</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">flatMap</span><span class="p">(</span><span class="nx">getRows</span><span class="p">),</span> <span class="nx">map</span><span class="p">(</span><span class="nx">getUsers</span><span class="p">),</span> <span class="nx">findAll</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-52"><div><h2>Всё вместе</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">render</span> <span class="o">=</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
+<span class="kd">var</span> <span class="nx">getUsersFromDb</span> <span class="o">=</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
+
+<span class="kd">var</span> <span class="nx">makePage</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">map</span><span class="p">(</span><span class="nx">render</span><span class="p">),</span> <span class="nx">flatMap</span><span class="p">(</span><span class="nx">cleanUpData</span><span class="p">),</span> <span class="nx">getUsersFromDb</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">makePage</span><span class="p">({</span><span class="na">limit</span><span class="p">:</span> <span class="mi">20</span><span class="p">});</span>
+
+<span class="nx">page</span><span class="p">.</span><span class="nx">fork</span><span class="p">(</span><span class="nx">logError</span><span class="p">,</span> <span class="nx">insertToDOM</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide center" id="nbsp-13"><div><h2> </h2>
+<p><img src="pictures/Happy.jpg" alt="" /></p>
+
+<p class="copy">Homer Simpson.  ©1999 20TH CENTURY FOX FILM CORP.</p>
+
+</div></section>
+<section class="slide" id="section-53"><div><h2>Плюсы</h2>
+
+<ul>
+  <li class="next">Легко рефакторить</li>
+  <li class="next">Легко тестировать</li>
+  <li class="next">Легко оптимизировать</li>
+  <li class="next">За функциональным программированием будущее</li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-54"><div><h2>Минусы</h2>
+
+<ul>
+  <li class="next">Есть порог вхождения</li>
+  <li class="next">Может быть слишком многословным</li>
+  <li class="next">Может быть менее производительным</li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-55"><div><h2>Полезные ссылки</h2>
+
+<ul>
+  <li><a href="https://github.com/MostlyAdequate/mostly-adequate-guide-ru">https://github.com/MostlyAdequate/mostly-adequate-guide-ru</a></li>
+  <li><a href="http://ramdajs.com/docs/">http://ramdajs.com/docs/</a></li>
+  <li><a href="https://github.com/ramda/ramda-fantasy">https://github.com/ramda/ramda-fantasy</a></li>
+  <li><a href="https://github.com/fantasyland/fantasy-land">https://github.com/fantasyland/fantasy-land</a></li>
+</ul>
+
+</div></section>
+<section class="slide shout" id="contacts"><div><h2>Контакты</h2>
+
+<div class="info">
+<p class="author">Сергей Ткаченко</p>
+<p class="position">Разработчик интерфейсов</p>
+
+    <div class="contacts">
+        <p class="contacts-left mail">ts1503@yandex-team.ru</p>
+
+        <p class="contacts-left contacts-top twitter">@tka4enko1503</p>
+    </div>
+</div>
+</div></section>
+
+	
+	<div class="progress"><div></div></div>
+	<script src="bower_components/shower-core/shower.min.js"></script>
+	<script src="bower_components/prismjs/prism.js"></script>
+	<!-- Copyright © 2017 Сергей Ткаченко, ЯндексМаркет — http://market.yandex.ru/ -->
+</body>
+</html>
