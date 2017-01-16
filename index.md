@@ -4,6 +4,17 @@ layout: default
 
 style: |
 
+    body {
+      height: 768px!important;
+    }
+
+    .slide {
+      width: 1024px;
+      height: 768px;
+    }
+    .slide > div {
+      padding-top: 48px;
+    }
     .slide.center h2 {
         margin: 0px 0 30px 0;
     }
